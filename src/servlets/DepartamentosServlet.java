@@ -28,8 +28,10 @@ import models.Seller;
 public class DepartamentosServlet extends HttpServlet{
 
 	private DepartmentDao dao;
+	private SellerDao daoS;
 	public DepartamentosServlet() {
 		this.dao = DaoFactory.createDepartmentDao();
+		this.daoS = DaoFactory.createSellerDao();
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -80,14 +82,27 @@ public class DepartamentosServlet extends HttpServlet{
 			break;
 		case "deletar":
 			Integer id = Integer.parseInt(req.getParameter("id"));
-			this.dao.deleteById(id);;
+			Department d2 = new Department(id, null);
+			List<Seller> ds =daoS.findByDepartment(d2);
+			System.out.println(ds);
+			if(ds.size() > 0) {
+				req.setAttribute("nao_permitido",true);
+				req.setAttribute("listaDepartment", dao.findAll());
+				RequestDispatcher rd = req.getRequestDispatcher("/department.jsp");
+				
+				System.out.println("NÃO EXCLUIU");
+				rd.forward(req, resp);
+			} else {
+				this.dao.deleteById(id);
+			}
+			
 			break;
 		case "editar":
 			Integer id_d = Integer.parseInt(req.getParameter("id"));
 			String nome = req.getParameter("nome");
-			Department d2 = new Department(id_d, nome);
+			Department d3 = new Department(id_d, nome);
 			
-			this.dao.update(d2);
+			this.dao.update(d3);
 		}
 		resp.sendRedirect("listar");
 

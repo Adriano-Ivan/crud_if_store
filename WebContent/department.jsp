@@ -91,6 +91,11 @@ Nome do novo departamento:
 	</table>
 </div>
 </div>
+	<c:if test="${not empty nao_permitido }">
+		<script>
+		alert("Não é permitido excluir um departamento que tenha vendedores !");
+		</script>
+	</c:if>
 	<script src='bootstrap_js/bootstrap.bundle.min.js'></script>
 </body>
 </html>
