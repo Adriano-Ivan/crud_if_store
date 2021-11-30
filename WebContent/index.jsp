@@ -30,8 +30,8 @@ color: #f00;
 </style>
 <body>
 <div class='container'>
-<a href='${pageContext.request.contextPath}/department.jsp'>GERENCIAR DEPARTAMENTOS</a>
-<a href='${pageContext.request.contextPath}/seller.jsp'>GERENCIAR VENDEDORES</a>
+<a href='${pageContext.request.contextPath}/departamentos/listar'>GERENCIAR DEPARTAMENTOS</a>
+<a href='${pageContext.request.contextPath}/sellers/listar'>GERENCIAR VENDEDORES</a>
 </div>
 </body>
 </html>
